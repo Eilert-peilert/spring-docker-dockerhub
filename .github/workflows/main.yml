@@ -37,7 +37,7 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           docker build . -t fantasticapp
-          echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
           docker tag fantasticapp eilertpeilert/fantasticapp
           docker push eilertpeilert/fantasticapp        
           
