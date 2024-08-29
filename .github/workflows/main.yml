@@ -33,6 +33,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          docker build . -t fantasticapp
           docker login
           docker tag fantasticapp eilertpeilert/fantasticapp
           docker push eilertpeilert/fantasticapp        
