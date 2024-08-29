@@ -23,3 +23,17 @@ jobs:
           docker build . -t hello
           docker tag hello 244530008913.dkr.ecr.eu-west-1.amazonaws.com/eilert/repo:$rev
           docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/eilert/repo:$rev
+          
+  push_to_dockerhub:
+    name: Push Docker image to Docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        run: |
+          docker login
+          docker tag fantasticapp eilertpeilert/fantasticapp
+          docker push eilertpeilert/fantasticapp        
+          
