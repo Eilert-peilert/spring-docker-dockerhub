@@ -33,16 +33,11 @@ jobs:
 
       - name: Build and push Docker image
         env:
-          DOCKERHUB_EMAIL: ${{ secrets.AWS_ACCESS_KEY_ID }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
-          git config --global credential.helper "cache --timeout=86400"
-          git config --global user.name DOCKERHUB_USERNAME
-          git config --global user.email DOCKERHUB_EMAIL
-          git config --global user.password DOCKERHUB_PASSWORD
           docker build . -t fantasticapp
-          docker login
+          docker login -u $DOCKERHUB_USERNAME --password-stdin $DOCKERHUB_PASSWORD
           docker tag fantasticapp eilertpeilert/fantasticapp
           docker push eilertpeilert/fantasticapp        
           
